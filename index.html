@@ -3,20 +3,16 @@
 <head>
     <title>Counter Button</title>
     <script>
-        // Set the initial count value to 1
         var count = 1;
 
-        // Function to increment the counter and update the display
         function incrementCounter() {
             var counterElement = document.getElementById('counter');
             count++;
             counterElement.innerText = count;
 
-            // Update the HTML file in the repository using the access token
             updateHTMLFile();
         }
 
-        // Function to update the HTML file in the repository
         function updateHTMLFile() {
             var accessToken = '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';
             var repositoryOwner = 'ARCHIVE-llll';
@@ -24,10 +20,8 @@
             var filePath = 'index.html';
             var newContent = '<!DOCTYPE html><html><head><title>Counter Button</title></head><body><h1>Counter Button</h1><p>Count: <span id="counter">' + count + '</span></p><button onclick="incrementCounter()">Increment</button></body></html>';
 
-            // Construct the URL for updating the file
-            var apiUrl = 'https://api.github.com/public_repos/' + repositoryOwner + '/' + repositoryName + '/contents/' + filePath;
+var apiUrl = 'https://api.github.com/repos/' + repositoryOwner + '/' + repositoryName + '/contents/' + filePath;
 
-            // Send a request to update the file using the GitHub API
             fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
