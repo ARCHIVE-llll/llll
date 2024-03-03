@@ -25,7 +25,7 @@
             var newContent = '<!DOCTYPE html><html><head><title>Counter Button</title></head><body><h1>Counter Button</h1><p>Count: <span id="counter">' + count + '</span></p><button onclick="incrementCounter()">Increment</button></body></html>';
 
             // Construct the URL for updating the file
-            var apiUrl = 'https://api.github.com/repos/' + repositoryOwner + '/' + repositoryName + '/contents/' + filePath;
+            var apiUrl = 'https://api.github.com/public_repos/' + repositoryOwner + '/' + repositoryName + '/contents/' + filePath;
 
             // Send a request to update the file using the GitHub API
             fetch(apiUrl, {
