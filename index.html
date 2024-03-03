@@ -1,1 +1,886 @@
 
+
+<!DOCTYPE html>
+<!-- Legal Footnote: This content is subject to copyright and should not be reproduced without permission. -->
+<!-- Written and created by Thomas John-Michael de Beer, feel free to contact me via tjdebeer@gmail.com  -->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>⧉</title>
+    <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAAACXBIWXMAAC4jAAAuIwF4pT92AAAGbWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpwaG90b3Nob3A9Imh0dHA6Ly9ucy5hZG9iZS5jb20vcGhvdG9zaG9wLzEuMC8iIHhtbG5zOmRjPSJodHRwOi8vcHVybC5vcmcvZGMvZWxlbWVudHMvMS4xLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyMy0xMC0wNFQxNjozMzowMiswMjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0xMC0wNFQxNjozMzowMiswMjowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjMtMTAtMDRUMTY6MzM6MDIrMDI6MDAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6M2Y5ODU5NTgtMDA2Ni1kOTQ4LTg5YjAtNDNhZmQzZGQ0YWJiIiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6ZmY5ZGRkYTAtMDMyOC1mYzQ2LWFlODctZjI4NTYyZjkxZGVlIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6MDUxYTAzOTQtOGZiNi0wYTQ5LThkNTEtM2E5NDY0NmNkMGRjIiBwaG90b3Nob3A6Q29sb3JNb2RlPSIzIiBwaG90b3Nob3A6SUNDUHJvZmlsZT0ic1JHQiBJRUM2MTk2Ni0yLjEiIGRjOmZvcm1hdD0iaW1hZ2UvcG5nIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDowNTFhMDM5NC04ZmI2LTBhNDktOGQ1MS0zYTk0NjQ2Y2QwZGMiIHN0RXZ0OndoZW49IjIwMjMtMTAtMDRUMTY6MzM6MDIrMDI6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjNmOTg1OTU4LTAwNjYtZDk0OC04OWIwLTQzYWZkM2RkNGFiYiIgc3RFdnQ6d2hlbj0iMjAyMy0xMC0wNFQxNjozMzowMiswMjowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8L3JkZjpTZXE+IDwveG1wTU06SGlzdG9yeT4gPHBob3Rvc2hvcDpUZXh0TGF5ZXJzPiA8cmRmOkJhZz4gPHJkZjpsaSBwaG90b3Nob3A6TGF5ZXJOYW1lPSLip4kiIHBob3Rvc2hvcDpMYXllclRleHQ9IuKniSIvPiA8L3JkZjpCYWc+IDwvcGhvdG9zaG9wOlRleHRMYXllcnM+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+EjrAYgAAAY1JREFUeJzt3MFxgkAARuF/M2kgLdBCWsBW0oIpwdQUW6AWS9gc4sERzENAMDPvm9mLhwXfCBk2q6XWGt32svUJPDsDAQMBA4HXoRdLKW9J3lc+lylOSbo5E+AfqVprbyRpk9R/ML6np7n9/i+HlxgwEDAQGLxJ33A8jy19JGnWPOBdgWqtX9cvllIWPB3UZuVAXmLAQMBAwEDAQMBAwEDAQMBAwEDAQMBA4J6H1anaLLd8e/2g2iTZz5nw4mG7q7X2VivWCPSe5PCguZsF5/7MwHKOlxgwEDAQ2CrQLkmZMK7vEceJ8+zGnqifIGAgYCBgIGAgYCBgIGAgYCBgIGAgYCBgIHDPiuKhlLLU6t3szZdr8RMEDAQMBG7dg05ZbsNmk/6/a7rzMeaatct+FNppTmOEffo75NsHvqUxhr5JsHen/QQGAgYCBgIGAgYCBgIGAgYCBgIGAgYCa+xRHLL1d/JHH3+rQI/a1Lk4LzFgIGAgsMY9qMvvJu1nN7h8W/yJrr95iQEDAQMBA4EfWAe+2C65qJwAAAAASUVORK5CYII=">
+    <style>
+        body {
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+#cameraViewContainer {
+            width: 42vh;
+            height: 42vh;
+            position: relative;
+            overflow: hidden;
+            background-color: black;
+            z-index: 2;
+        }
+
+#cameraView {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+#startCameraButton {
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    color: white;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    opacity: 1;
+    transition: opacity 2.2s;
+    z-index: 9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#startCameraButton img {
+    width: 33%;
+    height: auto;
+}
+
+#openButton {
+            -webkit-tap-highlight-color: transparent;
+            user-select: none;
+            position: fixed;
+            top: 85%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+            z-index: 2;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 2.2s;
+        }
+
+#openButton img {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    width: 44px;
+    height: auto;
+}
+
+</style>
+</head>
+<body>
+
+<button id="openButton" onclick="open_file_chooser()">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAACXBIWXMAAC4jAAAuIwF4pT92AAAGtmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyMy0wOC0wNlQwMDoxODoyNSswMjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wOC0wNlQxNjoyNToxNiswMjowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjMtMDgtMDZUMTY6MjU6MTYrMDI6MDAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzlkNjU5ZDQtZjk5ZC1iMDRjLTg2NjYtZTkzNTE0NTA0NGE2IiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6YWFmZGE5ZGUtYmVjZC04NzRkLWEwMTctNjcxMTVhOWZkNTIyIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6OGMzY2RkZDMtNDZiMy1jMzQzLTgyMzEtOWUxYzcxZGRlMDBkIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo4YzNjZGRkMy00NmIzLWMzNDMtODIzMS05ZTFjNzFkZGUwMGQiIHN0RXZ0OndoZW49IjIwMjMtMDgtMDZUMDA6MTg6MjUrMDI6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjk3YzA5YzRmLTE2ZGEtYmE0Zi04ZWRhLTlkMzE2MmE1OTMxOSIgc3RFdnQ6d2hlbj0iMjAyMy0wOC0wNlQwMDoxODoyNSswMjowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NzlkNjU5ZDQtZjk5ZC1iMDRjLTg2NjYtZTkzNTE0NTA0NGE2IiBzdEV2dDp3aGVuPSIyMDIzLTA4LTA2VDE2OjI1OjE2KzAyOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgVcEyoAAAtFSURBVHic7duxjqz3Qcbhd33WNpYTRYpjQYxoiEARBQUdihASETRU9DTcQOpUdFQ03APiAmhoEAKEBDeRXEEksCA+9vE5PksxR6Ki8pn9r3/zPNJoy3l35tvv98032ruHh4cBAN9s75weAAB8fYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAfenB2x7se3ZtofTQ4Cc+21/t+0n2/7z8Ba4qqcQ9PdODwDS3pu7kdyAp3CQvzo9AEj7dJc7gZD2FIIOcE3Ptt2dHgHXJugAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABBwf3rAE/Ef2/5xlwucd7c9nJ0D33ivtr237c+3fXJ4C9wEQb/4+21/vUvQn03Q4et6ve2jbb8/QYdHIegXH7z5+erNA/j6vtp2d3oE3ArfoV98sMutduDteTYfGuDRCPrF67nNDtfg7woeiaADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKAD1/RwesAuG57CDrgqQQeu5fNtL0+P2PZ822enR8C13Z8eAI/k3W2fbPvWnkZk6l5v+84ur/dpH2/74bYX254d3kLXs13OLT87NUDQuRW/se2vdjmxf3l4yy149ebnD4+uuPiTXd7/7XJhB9dwv+2LbT86OQBuwYfbfm/bb58ewqP77g6eZOGx+A6dW/Fi23+dHgGkfXryyQWdW3J3egCQdvQcI+gAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABBwf3oA3Jifbfu3XS6m7w5vuaavtr2/7Y+3fXx4y8+3/fu2l3POq7nb9mLbt7b9wbZfPzvnLAc3PK5/3vbTbV+cHvIIvrfLCfYPD+/4h21/ue3Lwzt4++62PexyrP3Ntj87uuYwQYfH9e6257uNoH++y+972vu7xPz56SFc1QenB5zmO3R4XO/sdv7unsrXCvfz4aXulv6u/l83/wIAQIGgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoF/cvXnQ5f0F0gT94ottL06P4Kqeynv8ctur0yMeyavdzu8Kx92fHvBE3G/71dMjuJqHbR9ve3Z6yC7H2vd3ucCo+2g+NMCjEfSLv9j2R9tezwmo6NW2b2/7rdNDtv3p/m9H+WuA19ve2/Y7p4fArRD0i0/ePODavvfmAfBW+TQKAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDtS93vZwegRc21MI+t3pAUDasz2Ncx1c1VM4yJ+dHgCkfXfb/ekRcG1P4SD/2112fLancYFBy8O259t+bduPdzm5n/Tzbf+yyy7H+/V9uO2fdjm/QNpTCPpPdjmxvZzb77x9D7scW7+57ZNtPzo7Z/+67afbXszx/hje3eWC7ovTQ+DankLQPz09gJvwy21fnR6xy4b/3vbl6SFAi1t+3IoPtv3K6RHb3t/TuJAGYgSdW+HfloA0QQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQYfHdXd6AAS9Mz3zAsAje77ti9MjIOZ/tn12esRp96cHwI35cNsPtr08PQQiXm37eHrmBYBH9uNtH+1yd8ztd/j6vtzlQvl3Tw85TdDhcX3/zQPgrfIdOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6t+LhzQPgWo6eYwSdW/Hhtu+cHgGkffvkk9+ffHJ4RJ9v+8W2H2x7fngL0PTLk09+9/DgLiQAfNO55Q4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgAB/wvVknz61SsNTwAAAABJRU5ErkJggg==
+">
+    </button>
+
+<div id="cameraViewContainer">
+    <video id="cameraView" autoplay></video>
+    <button id="startCameraButton" onclick="toggleFullscreen(); hideui();">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1t+KAAAACXBIWXMAAC4jAAAuIwF4pT92AAAGtmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdEV2dD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlRXZlbnQjIiB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iIHhtbG5zOnBob3Rvc2hvcD0iaHR0cDovL25zLmFkb2JlLmNvbS9waG90b3Nob3AvMS4wLyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiB4bXA6Q3JlYXRlRGF0ZT0iMjAyMy0wOC0wNlQwMDoxODoyNSswMjowMCIgeG1wOk1ldGFkYXRhRGF0ZT0iMjAyMy0wOC0wNlQxNjoyNToxNiswMjowMCIgeG1wOk1vZGlmeURhdGU9IjIwMjMtMDgtMDZUMTY6MjU6MTYrMDI6MDAiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzlkNjU5ZDQtZjk5ZC1iMDRjLTg2NjYtZTkzNTE0NTA0NGE2IiB4bXBNTTpEb2N1bWVudElEPSJhZG9iZTpkb2NpZDpwaG90b3Nob3A6YWFmZGE5ZGUtYmVjZC04NzRkLWEwMTctNjcxMTVhOWZkNTIyIiB4bXBNTTpPcmlnaW5hbERvY3VtZW50SUQ9InhtcC5kaWQ6OGMzY2RkZDMtNDZiMy1jMzQzLTgyMzEtOWUxYzcxZGRlMDBkIiBkYzpmb3JtYXQ9ImltYWdlL3BuZyIgcGhvdG9zaG9wOkNvbG9yTW9kZT0iMyIgcGhvdG9zaG9wOklDQ1Byb2ZpbGU9InNSR0IgSUVDNjE5NjYtMi4xIj4gPHhtcE1NOkhpc3Rvcnk+IDxyZGY6U2VxPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0iY3JlYXRlZCIgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo4YzNjZGRkMy00NmIzLWMzNDMtODIzMS05ZTFjNzFkZGUwMGQiIHN0RXZ0OndoZW49IjIwMjMtMDgtMDZUMDA6MTg6MjUrMDI6MDAiIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkFkb2JlIFBob3Rvc2hvcCBDQyAoV2luZG93cykiLz4gPHJkZjpsaSBzdEV2dDphY3Rpb249InNhdmVkIiBzdEV2dDppbnN0YW5jZUlEPSJ4bXAuaWlkOjk3YzA5YzRmLTE2ZGEtYmE0Zi04ZWRhLTlkMzE2MmE1OTMxOSIgc3RFdnQ6d2hlbj0iMjAyMy0wOC0wNlQwMDoxODoyNSswMjowMCIgc3RFdnQ6c29mdHdhcmVBZ2VudD0iQWRvYmUgUGhvdG9zaG9wIENDIChXaW5kb3dzKSIgc3RFdnQ6Y2hhbmdlZD0iLyIvPiA8cmRmOmxpIHN0RXZ0OmFjdGlvbj0ic2F2ZWQiIHN0RXZ0Omluc3RhbmNlSUQ9InhtcC5paWQ6NzlkNjU5ZDQtZjk5ZC1iMDRjLTg2NjYtZTkzNTE0NTA0NGE2IiBzdEV2dDp3aGVuPSIyMDIzLTA4LTA2VDE2OjI1OjE2KzAyOjAwIiBzdEV2dDpzb2Z0d2FyZUFnZW50PSJBZG9iZSBQaG90b3Nob3AgQ0MgKFdpbmRvd3MpIiBzdEV2dDpjaGFuZ2VkPSIvIi8+IDwvcmRmOlNlcT4gPC94bXBNTTpIaXN0b3J5PiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgVcEyoAAAtFSURBVHic7duxjqz3Qcbhd33WNpYTRYpjQYxoiEARBQUdihASETRU9DTcQOpUdFQ03APiAmhoEAKEBDeRXEEksCA+9vE5PksxR6Ki8pn9r3/zPNJoy3l35tvv98032ruHh4cBAN9s75weAAB8fYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAfenB2x7se3ZtofTQ4Cc+21/t+0n2/7z8Ba4qqcQ9PdODwDS3pu7kdyAp3CQvzo9AEj7dJc7gZD2FIIOcE3Ptt2dHgHXJugAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABBwf3rAE/Ef2/5xlwucd7c9nJ0D33ivtr237c+3fXJ4C9wEQb/4+21/vUvQn03Q4et6ve2jbb8/QYdHIegXH7z5+erNA/j6vtp2d3oE3ArfoV98sMutduDteTYfGuDRCPrF67nNDtfg7woeiaADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKAD1/RwesAuG57CDrgqQQeu5fNtL0+P2PZ822enR8C13Z8eAI/k3W2fbPvWnkZk6l5v+84ur/dpH2/74bYX254d3kLXs13OLT87NUDQuRW/se2vdjmxf3l4yy149ebnD4+uuPiTXd7/7XJhB9dwv+2LbT86OQBuwYfbfm/bb58ewqP77g6eZOGx+A6dW/Fi23+dHgGkfXryyQWdW3J3egCQdvQcI+gAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABBwf3oA3Jifbfu3XS6m7w5vuaavtr2/7Y+3fXx4y8+3/fu2l3POq7nb9mLbt7b9wbZfPzvnLAc3PK5/3vbTbV+cHvIIvrfLCfYPD+/4h21/ue3Lwzt4++62PexyrP3Ntj87uuYwQYfH9e6257uNoH++y+972vu7xPz56SFc1QenB5zmO3R4XO/sdv7unsrXCvfz4aXulv6u/l83/wIAQIGgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoANAgKADQICgA0CAoF/cvXnQ5f0F0gT94ottL06P4Kqeynv8ctur0yMeyavdzu8Kx92fHvBE3G/71dMjuJqHbR9ve3Z6yC7H2vd3ucCo+2g+NMCjEfSLv9j2R9tezwmo6NW2b2/7rdNDtv3p/m9H+WuA19ve2/Y7p4fArRD0i0/ePODavvfmAfBW+TQKAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDtS93vZwegRc21MI+t3pAUDasz2Ncx1c1VM4yJ+dHgCkfXfb/ekRcG1P4SD/2112fLancYFBy8O259t+bduPdzm5n/Tzbf+yyy7H+/V9uO2fdjm/QNpTCPpPdjmxvZzb77x9D7scW7+57ZNtPzo7Z/+67afbXszx/hje3eWC7ovTQ+DankLQPz09gJvwy21fnR6xy4b/3vbl6SFAi1t+3IoPtv3K6RHb3t/TuJAGYgSdW+HfloA0QQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQQeAAEEHgABBB4AAQYfHdXd6AAS9Mz3zAsAje77ti9MjIOZ/tn12esRp96cHwI35cNsPtr08PQQiXm37eHrmBYBH9uNtH+1yd8ztd/j6vtzlQvl3Tw85TdDhcX3/zQPgrfIdOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6AAQIOgAECDoABAg6t+LhzQPgWo6eYwSdW/Hhtu+cHgGkffvkk9+ffHJ4RJ9v+8W2H2x7fngL0PTLk09+9/DgLiQAfNO55Q4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgABgg4AAYIOAAGCDgAB/wvVknz61SsNTwAAAABJRU5ErkJggg==
+" alt="Start Camera">
+    </button>
+
+    <canvas id="photoCanvas" style="display: none;"></canvas>
+</div>
+
+
+<script>
+
+
+
+function hideui() {
+    var startCameraButton = document.getElementById('startCameraButton');
+    var openButton = document.getElementById('openButton');
+
+    startCameraButton.disabled = true;
+    startCameraButton.style.display = 'none';
+    openButton.disabled = false;
+    openButton.style.opacity = '0.5';
+    openButton.style.pointerEvents = 'auto';
+}
+
+
+
+
+let SERVER_URL = 'https://frame-archive.online'
+
+function toggleFullscreen() {
+            const docElement = document.documentElement;
+
+            if (docElement.requestFullscreen) {
+                if (document.fullscreenElement) {
+                    document.exitFullscreen();
+                } else {
+                    docElement.requestFullscreen().catch(err => {
+                        console.error('Error attempting to enable fullscreen:', err);
+                    });
+                }
+            }
+        }
+
+
+
+
+
+// Function to open file chooser
+function open_file_chooser() {
+    disableFullscreenChangeListener();
+
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+
+    var fileInput = document.createElement("input");
+    fileInput.type = "file";
+    fileInput.accept = "image/*";
+    fileInput.click();
+
+    fileInput.addEventListener("change", function () {
+        var selectedFile = this.files[0];
+        if (selectedFile) {
+            processAndSendImage(selectedFile);
+            intervalId = setInterval(intervalCallback, 333);
+        }
+    });
+
+    fileInput.addEventListener("cancel", function () {
+        enableFullscreenChangeListener();
+        toggleFullscreen();
+        intervalId = setInterval(intervalCallback, 333);
+    });
+}
+
+// Function to process and send image
+function processAndSendImage(selectedFile) {
+    var canvas = document.createElement("canvas");
+    var ctx = canvas.getContext("2d");
+    var img = new Image();
+
+    img.onload = function () {
+        const borderSize = 10;
+        canvas.width = img.width + 2 * borderSize;
+        canvas.height = img.height + 2 * borderSize;
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, borderSize, borderSize, img.width, img.height);
+        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const transformedImageData = processImage(imageData);
+        const processedImageArray = SequenceandSend(transformedImageData);
+
+        if (processedImageArray) {
+            FRAME(processedImageArray);
+        } else {
+            console.error('Processed image is undefined. Cannot proceed.');
+        }
+    };
+
+    img.src = URL.createObjectURL(selectedFile);
+}
+
+let intervalId;
+let intervalCallback;
+let CameraStatus = false;
+const cameraView = document.getElementById('cameraView');
+const takePhotoButton = document.getElementById('takePhotoButton');
+const photoCanvas = document.getElementById('photoCanvas');
+const canvasContext = photoCanvas.getContext('2d');
+let stream;
+let currentCameraIndex = 0;
+
+const startCameraButton = document.getElementById('startCameraButton');
+startCameraButton.addEventListener('click', startCamera);
+
+async function startCamera() {
+    try {
+        let selectedDeviceId = localStorage.getItem('selectedCamera');
+
+        if (!selectedDeviceId) {
+            const devices = await navigator.mediaDevices.enumerateDevices();
+            const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+            if (videoDevices.length === 0) {
+                throw new Error('No video devices found.');
+            }
+
+            currentCameraIndex = videoDevices.length > 1 ? 1 : 0;
+            selectedDeviceId = videoDevices[currentCameraIndex].deviceId;
+
+            localStorage.setItem('selectedCamera', selectedDeviceId);
+        }
+
+        const constraints = {
+            video: { deviceId: selectedDeviceId },
+            audio: false,
+        };
+
+        stream = await navigator.mediaDevices.getUserMedia(constraints);
+        cameraView.srcObject = stream;
+
+        intervalCallback = () => {
+            takePhoto();
+        };
+        intervalId = setInterval(intervalCallback, 333);
+
+    } catch (error) {
+        console.error('Error initializing camera:', error);
+    }
+}
+
+
+async function switchCamera() {
+    try {
+        stopCamera();
+        const devices = await navigator.mediaDevices.enumerateDevices();
+        const videoDevices = devices.filter(device => device.kind === 'videoinput');
+
+        if (videoDevices.length === 0) {
+            throw new Error('No video devices found.');
+        }
+
+        currentCameraIndex = (currentCameraIndex + 1) % videoDevices.length;
+        const selectedDeviceId = videoDevices[currentCameraIndex].deviceId;
+
+        localStorage.setItem('selectedCamera', selectedDeviceId);
+
+        await startCamera();
+    } catch (error) {
+        handleCameraError(error);
+    }
+}
+
+function stopCamera() {
+    clearInterval(intervalId);
+
+    if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach(track => {
+            track.stop();
+        });
+    }
+}
+
+function handleSwipe() {
+    const deltaY = touchendY - touchstartY;
+
+    if (deltaY > 50) {
+        switchCamera();
+    }
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'ArrowUp') {
+        switchCamera();
+    }
+});
+
+let touchstartY;
+let touchendY;
+
+document.addEventListener('touchstart', (event) => {
+    touchstartY = event.touches[0].clientY;
+});
+
+document.addEventListener('touchmove', (event) => {
+    event.preventDefault();
+});
+
+document.addEventListener('touchend', (event) => {
+    touchendY = event.changedTouches[0].clientY;
+    handleSwipe();
+});
+
+startCameraButton.addEventListener('click', startCamera);
+
+
+function takePhoto() {
+    if (stream) {
+        photoCanvas.width = cameraView.videoWidth;
+        photoCanvas.height = cameraView.videoHeight;
+        canvasContext.drawImage(cameraView, 0, 0, photoCanvas.width, photoCanvas.height);
+        const imageData = canvasContext.getImageData(0, 0, photoCanvas.width, photoCanvas.height);
+        const transformedImageData = processImage(imageData);
+        const processedImageArray = SequenceandSend(transformedImageData);
+
+        if (processedImageArray) {
+            FRAME(processedImageArray);
+        } else {
+            console.error('Processed image is undefined. Cannot proceed.');
+        }
+    }
+}
+
+function processImage(srcImageData) {
+    const { width, height, data } = srcImageData;
+    const size = Math.min(width, height);
+    const start_x = (width - size) / 2;
+    const start_y = (height - size) / 2;
+    const croppedImageData = cropImageData(srcImageData, start_x, start_y, size, size);
+    const correctedFormat = resizeCanvas(croppedImageData, 507, 507, 5);
+    const IMGDATAcroppedImageData = canvasToImageData(correctedFormat);
+    const grayImageData = convertToGrayscale(IMGDATAcroppedImageData);
+    const binaryImageData = applyThreshold(grayImageData);
+    const largestContour = findLargestEnclosedArea(binaryImageData);
+
+    if (largestContour) {
+        const Quadrilateral = findQuadrilateral(largestContour);
+        if (Quadrilateral.length === 4) {
+            const transformedImageData = transcribePixels(correctedFormat, Quadrilateral);
+            return transformedImageData;
+        } else {
+            console.error('Could not find a valid quadrilateral contour.');
+            return null;
+        }
+    } else {
+        console.error('Could not find a valid largest contour.');
+        return null;
+    }
+}
+
+function transcribePixels(correctedFormat, Quadrilateral) {
+    const canvasSize = 512;
+    const ctx = correctedFormat.getContext('2d');
+    const imageData = ctx.getImageData(0, 0, canvasSize, canvasSize);
+    const reorderedQuadrilateral = [
+        Quadrilateral[2],
+        Quadrilateral[3],
+        Quadrilateral[1],
+        Quadrilateral[0]
+    ];
+
+    const destSquare = [
+        { x: 0, y: 0 },
+        { x: canvasSize - 1, y: 0 },
+        { x: canvasSize - 1, y: canvasSize - 1 },
+        { x: 0, y: canvasSize - 1 }
+    ];
+
+    const matrix = findHomographyMatrix(reorderedQuadrilateral, destSquare);
+    const newCanvas = document.createElement('canvas');
+    newCanvas.width = canvasSize;
+    newCanvas.height = canvasSize;
+    const newCtx = newCanvas.getContext('2d');
+    applyPerspectiveTransform(ctx, newCtx, imageData, matrix, reorderedQuadrilateral);
+    const croppedImageData = newCtx.getImageData(6, 6, canvasSize - 2 * 6, canvasSize - 2 * 6);
+    return croppedImageData;
+}
+
+function findHomographyMatrix(srcPoints, destPoints) {
+    const A = [];
+    const destLength = destPoints.length;
+
+    for (let i = 0; i < destLength; i++) {
+        const { x, y } = destPoints[i];
+        const { x: u, y: v } = srcPoints[i];
+
+        A.push([x, y, 1, 0, 0, 0, -x * u, -y * u, u]);
+        A.push([0, 0, 0, x, y, 1, -x * v, -y * v, v]);
+    }
+
+    const matrix = gaussianElimination(A);
+    return [
+        [matrix[0], matrix[1], matrix[2]],
+        [matrix[3], matrix[4], matrix[5]],
+        [matrix[6], matrix[7], matrix[8] || 1]
+    ];
+}
+
+function gaussianElimination(matrix) {
+    const numRows = matrix.length;
+    const numCols = matrix[0].length;
+
+    for (let i = 0; i < numRows; i++) {
+        let pivotRow = i;
+        while (pivotRow < numRows && matrix[pivotRow][i] === 0) {
+            pivotRow++;
+        }
+
+        if (pivotRow === numRows) {
+            continue;
+        }
+
+        [matrix[i], matrix[pivotRow]] = [matrix[pivotRow], matrix[i]];
+        const diagonalElement = matrix[i][i];
+
+        for (let j = i; j < numCols; j++) {
+            matrix[i][j] /= diagonalElement;
+        }
+
+        for (let k = 0; k < numRows; k++) {
+            if (k !== i) {
+                const factor = matrix[k][i];
+                for (let j = i; j < numCols; j++) {
+                    matrix[k][j] -= factor * matrix[i][j];
+                }
+            }
+        }
+    }
+
+    const solution = new Array(numRows);
+    for (let i = 0; i < numRows; i++) {
+        solution[i] = matrix[i][numCols - 1];
+    }
+
+    return solution;
+}
+
+function applyPerspectiveTransform(srcCtx, destCtx, imageData, matrix) {
+    const canvasSize = imageData.width;
+    const newImageData = destCtx.createImageData(canvasSize, canvasSize);
+    const matrix0 = matrix[0];
+    const matrix1 = matrix[1];
+    const matrix2 = matrix[2];
+
+    for (let y = 0; y < canvasSize; y++) {
+        for (let x = 0; x < canvasSize; x++) {
+            const newX = matrix0[0] * x + matrix0[1] * y + matrix0[2];
+            const newY = matrix1[0] * x + matrix1[1] * y + matrix1[2];
+            const newW = matrix2[0] * x + matrix2[1] * y + matrix2[2];
+            const srcCoords = { x: newX / newW, y: newY / newW };
+
+            const floorX = Math.floor(srcCoords.x);
+            const floorY = Math.floor(srcCoords.y);
+            const pixelIndex = (floorY * canvasSize + floorX) * 4;
+            const destIndex = (y * canvasSize + x) * 4;
+
+            const srcPixel = {
+                r: imageData.data[pixelIndex],
+                g: imageData.data[pixelIndex + 1],
+                b: imageData.data[pixelIndex + 2],
+                a: imageData.data[pixelIndex + 3]
+            };
+
+            newImageData.data[destIndex] = srcPixel.r;
+            newImageData.data[destIndex + 1] = srcPixel.g;
+            newImageData.data[destIndex + 2] = srcPixel.b;
+            newImageData.data[destIndex + 3] = srcPixel.a;
+        }
+    }
+    destCtx.putImageData(newImageData, 0, 0);
+}
+
+function cropImageData(srcImageData, start_x, start_y, width, height) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = width;
+    canvas.height = height;
+    ctx.putImageData(srcImageData, -start_x, -start_y);
+    const croppedImageData = ctx.getImageData(0, 0, width, height);
+    return croppedImageData;
+}
+
+function convertToGrayscale(imageData) {
+    const pixels = imageData.data;
+    const numPixels = pixels.length / 4;
+
+    for (let i = 0; i < numPixels; i++) {
+        const startIndex = i * 4;
+        const red = pixels[startIndex];
+        const green = pixels[startIndex + 1];
+        const blue = pixels[startIndex + 2];
+        const average = (red + green + blue) / 3;
+        pixels[startIndex] = average;
+        pixels[startIndex + 1] = average;
+        pixels[startIndex + 2] = average;
+    }
+    return imageData;
+}
+
+function applyThreshold(grayImageData, threshold = 99) {
+    const pixels = new Uint8ClampedArray(grayImageData.data);
+    const numPixels = pixels.length / 4;
+
+    for (let i = 0; i < numPixels; i++) {
+        const startIndex = i * 4;
+        const intensity = pixels[startIndex];
+        const newValue = intensity >= threshold ? 255 : 0;
+        pixels[startIndex] = newValue;
+        pixels[startIndex + 1] = newValue;
+        pixels[startIndex + 2] = newValue;
+    }
+    return new ImageData(pixels, grayImageData.width, grayImageData.height);
+}
+
+function resizeCanvas(imageOrCanvas, width, height, borderSize) {
+    const canvas = document.createElement('canvas');
+    canvas.width = width + 2 * borderSize;
+    canvas.height = height + 2 * borderSize;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    if (imageOrCanvas instanceof ImageData) {
+        const tempCanvas = document.createElement('canvas');
+        tempCanvas.width = imageOrCanvas.width;
+        tempCanvas.height = imageOrCanvas.height;
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCtx.putImageData(imageOrCanvas, 0, 0);
+        ctx.drawImage(
+            tempCanvas,
+            0,
+            0,
+            tempCanvas.width,
+            tempCanvas.height,
+            borderSize,
+            borderSize,
+            width,
+            height
+        );
+    } else {
+        ctx.drawImage(
+            imageOrCanvas,
+            0,
+            0,
+            imageOrCanvas.width,
+            imageOrCanvas.height,
+            borderSize,
+            borderSize,
+            width,
+            height
+        );
+    }
+    return canvas;
+}
+
+function canvasToImageData(canvas) {
+    const ctx = canvas.getContext('2d');
+    return ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function findQuadrilateral(largestContour) {
+    const centralPoint = findCentralPoint(largestContour);
+    if (!centralPoint) {
+        return null;
+    }
+
+    const topLeftCorner = findExtremePoint(largestContour, centralPoint, (x, y) => x < centralPoint.x && y > centralPoint.y);
+    const topRightCorner = findExtremePoint(largestContour, centralPoint, (x, y) => x > centralPoint.x && y > centralPoint.y);
+    const bottomLeftCorner = findExtremePoint(largestContour, centralPoint, (x, y) => x < centralPoint.x && y < centralPoint.y);
+    const bottomRightCorner = findExtremePoint(largestContour, centralPoint, (x, y) => x > centralPoint.x && y < centralPoint.y);
+    
+    return [topLeftCorner, topRightCorner, bottomLeftCorner, bottomRightCorner];
+}
+
+
+function findCentralPoint(largestContour) {
+    const totalPoints = largestContour.length;
+    if (totalPoints === 0) {
+        throw new Error('No points found in the largest contour.');
+    }
+
+    let sumX = 0;
+    let sumY = 0;
+
+    for (const point of largestContour) {
+        sumX += point.x;
+        sumY += point.y;
+    }
+
+    const centralX = sumX / totalPoints;
+    const centralY = sumY / totalPoints;
+
+    if (isNaN(centralX) || isNaN(centralY)) {
+        throw new Error('Central point calculation resulted in NaN values.');
+    }
+
+    return { x: centralX, y: centralY };
+}
+
+function distanceSquared(point1, point2) {
+    const dx = point2.x - point1.x;
+    const dy = point2.y - point1.y;
+    return dx * dx + dy * dy;
+}
+
+function findExtremePoint(largestContour, centralPoint, conditionFunction) {
+    let extremePoint = null;
+    let maxDistanceSquared = 0;
+
+    for (const point of largestContour) {
+        const { x, y } = point;
+
+        if (conditionFunction(x, y)) {
+            const currentDistanceSquared = distanceSquared(centralPoint, point);
+            if (!extremePoint || currentDistanceSquared > maxDistanceSquared) {
+                extremePoint = point;
+                maxDistanceSquared = currentDistanceSquared;
+            }
+        }
+    }
+    return extremePoint;
+}
+
+function findLargestEnclosedArea(binaryImageData) {
+    const contours = findContours(binaryImageData);
+    const validContours = contours.filter(contour => contour.length >= 4);
+    let maxArea = -1;
+    let largestContour = null;
+
+    validContours.forEach((contour, index) => {
+        const area = calculateContourArea(contour);
+
+        if (area > maxArea) {
+            maxArea = area;
+            largestContour = contour;
+        }
+    });
+
+    if (!largestContour) {
+        console.error('Could not find a valid largest contour.');
+    }
+
+    return largestContour;
+}
+
+function calculateContourArea(contour) {
+    let area = 0;
+
+    for (let i = 0; i < contour.length; i++) {
+        const current = contour[i];
+        const next = contour[(i + 1) % contour.length];
+        area += (current.x * next.y - next.x * current.y);
+    }
+    return Math.abs(area) / 2;
+}
+
+function findContours(binaryImageData) {
+    const width = binaryImageData.width;
+    const height = binaryImageData.height;
+    const visited = Array.from({ length: height }, () => Array(width).fill(false));
+    const contours = [];
+
+    function isValid(x, y) {
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+
+    function dfs(startX, startY) {
+        const stack = [{ x: startX, y: startY }];
+        const contour = [];
+
+        while (stack.length > 0) {
+            const { x, y } = stack.pop();
+
+            if (isValid(x, y) && !visited[x][y]) {
+                const index = (y * width + x) * 4;
+                const intensity = binaryImageData.data[index];
+
+                if (intensity === 0) {
+                    visited[x][y] = true;
+                    contour.push({ x, y });
+
+                    stack.push({ x: x + 1, y });
+                    stack.push({ x: x - 1, y });
+                    stack.push({ x, y: y + 1 });
+                    stack.push({ x, y: y - 1 });
+                }
+            }
+        }
+
+        return contour;
+    }
+
+    for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+            const index = (y * width + x) * 4;
+            const intensity = binaryImageData.data[index];
+
+            if (intensity === 0 && !visited[x][y]) {
+                const contour = dfs(x, y);
+
+                if (contour.length > 10) {
+                    contours.push([...contour]);
+                }
+            }
+        }
+    }
+
+    return contours;
+}
+
+function SequenceandSend(transformedImageData) {
+    if (transformedImageData === undefined) {
+        console.error('transformedImageData is undefined. Cannot proceed.');
+        return;
+    }
+    const resizedWidth = 8;
+    const resizedHeight = 8;
+    const resizedImageData = resizeImage(transformedImageData, resizedWidth, resizedHeight);
+    const processedImageArray = imageToFlatArray(resizedImageData);
+    return processedImageArray;
+}
+
+function resizeImage(imageData, width, height) {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d');
+
+    if (!(imageData instanceof ImageData)) {
+        console.error('Invalid image source provided to resizeImage function:', imageData);
+        return null;
+    }
+
+    canvas.width = width;
+    canvas.height = height;
+
+    try {
+        const tempCanvas = document.createElement('canvas');
+        const tempCtx = tempCanvas.getContext('2d');
+        tempCanvas.width = imageData.width;
+        tempCanvas.height = imageData.height;
+        tempCtx.putImageData(imageData, 0, 0);
+
+        ctx.drawImage(tempCanvas, 0, 0, tempCanvas.width, tempCanvas.height, 0, 0, width, height);
+
+        return ctx.getImageData(0, 0, width, height);
+    } catch (error) {
+        console.error('Error resizing image:', error.message);
+        return null;
+    }
+}
+
+function imageToFlatArray(imageData) {
+    if (!imageData || !imageData.data) {
+        console.error('Invalid imageData provided to imageToFlatArray function.');
+        return null;
+    }
+    const { data } = imageData;
+    const flatArray = [];
+
+    for (let i = 0; i < data.length; i += 4) {
+        flatArray.push(data[i], data[i + 1], data[i + 2]);
+    }
+    return flatArray;
+}
+
+
+//////FULLSCREEN LISTENER
+
+var isFullscreenChangeListenerActive = true;
+function enableFullscreenChangeListener() {
+  isFullscreenChangeListenerActive = true;
+}
+
+function disableFullscreenChangeListener() {
+  isFullscreenChangeListenerActive = false;
+}
+document.addEventListener('fullscreenchange', function() {
+  if (isFullscreenChangeListenerActive) {
+    if (!document.fullscreenElement) {
+      location.reload();
+    }
+  }
+});
+
+
+//FRAME
+let isWindowOpen = false;
+
+function FRAME(processedImageArray) {
+    console.log('FRAME function called with processedImageArray:', processedImageArray);
+
+    const request = indexedDB.open('myDatabase', 1);
+
+    request.onsuccess = function (event) {
+        console.log('Database opened successfully!');
+        const db = event.target.result;
+
+        const transaction = db.transaction(['data'], 'readonly');
+        const objectStore = transaction.objectStore('data');
+        const cursorRequest = objectStore.openCursor();
+
+        cursorRequest.onsuccess = function (event) {
+            const cursor = event.target.result;
+            if (cursor) {
+                console.log('Record found:', cursor.value);
+                const weights = cursor.value.weights;
+                const link = cursor.value.links;
+
+                if (waveSequenceCohesion(weights, processedImageArray) && !isWindowOpen) {
+                    console.log('Opening window:', link);
+                    window.open(link, '_blank');
+                    isWindowOpen = true;
+
+                    setTimeout(function () {
+                        isWindowOpen = false;
+                        location.reload();
+                    }, 3333);
+                }
+                cursor.continue();
+            } else {
+                console.log('No matching record found.');
+            }
+        };
+
+        cursorRequest.onerror = function (event) {
+            console.error('Error opening cursor:', event.target.error);
+        };
+    };
+
+    request.onerror = function (event) {
+        console.error('Error opening database:', event.target.error);
+    };
+}
+
+function waveSequenceCohesion(weights, processedImageArray) {
+    console.log('Comparing processedImageArray:', processedImageArray, 'with weights:', weights);
+    for (let i = 0; i < processedImageArray.length; i++) {
+        console.log('Comparing element', i, 'processedImageArray:', processedImageArray[i], 'with weight:', weights[i]);
+        if (Math.abs(processedImageArray[i] - weights[i]) >= 54) {
+            console.log('Elements are not within the threshold:', processedImageArray[i], weights[i]);
+            return false;
+        }
+    }
+    console.log('All elements are within the threshold.');
+    return true;
+}
+
+const request = indexedDB.open('myDatabase', 1);
+
+request.onupgradeneeded = function (event) {
+    const db = event.target.result;
+
+    const objectStore = db.createObjectStore('data', { keyPath: 'id', autoIncrement: true });
+    objectStore.createIndex('weights', 'weights', { unique: false });
+    objectStore.createIndex('links', 'links', { unique: false });
+
+    const initialData = [
+        { weights: [1,1,3,0,0,0,2,0,3,2,0,3,1,1,1,2,0,3,2,2,4,1,1,3,2,0,3,2,0,4,2,0,3,4,2,5,2,0,1,5,0,6,3,1,6,1,1,3,2,0,3,2,0,4,1,0,10,8,4,4,94,70,110,1,0,4,1,0,4,2,2,4,3,1,4,3,1,4,80,55,94,141,107,176,116,90,162,170,127,182,3,1,4,2,1,5,4,1,4,2,0,3,1,1,3,248,244,250,118,90,174,0,0,0,1,1,3,2,2,4,2,0,3,2,0,3,1,1,3,5,3,24,141,108,174,3,1,4,2,0,3,1,1,3,0,0,2,2,0,3,4,2,7,4,2,5,2,0,3,1,1,3,2,0,3,2,2,4,1,1,3,3,3,3,2,0,2,2,0,3,2,0,2,2,2,4,2,2,3,2,2,2], links: 'https://www.youtube.com' },
+        { weights: [2,2,2,2], links: 'https://www.google.com' }
+    ];
+
+    initialData.forEach(entry => {
+        objectStore.add(entry);
+    });
+};
+
+request.onsuccess = function (event) {
+    console.log('Database opened successfully!');
+    const db = event.target.result;
+};
+
+request.onerror = function (event) {
+    console.error('Error opening database:', event.target.error);
+};
+
+
+    </script>
+</body>
+</html>
