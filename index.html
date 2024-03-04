@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Counter Buttonllll</title>
+    <title>Counter Button</title>
     <script>
         var count = 1;
 
@@ -33,7 +33,7 @@
                     updatedContent = atob(updatedContent);
                     updatedContent = updatedContent.replace('</title>', 'l</title>');
 
-                    updatedContent = updatedContent.replace('<span id="counter">' + count + '</span>', '<span id="counter">' + newCount + '</span>');
+                    updatedContent = updatedContent.replace('<span id="counter">' + (count - 1) + '</span>', '<span id="counter">' + newCount + '</span>');
 
                     fetch(apiUrl, {
                         method: 'PUT',
@@ -62,7 +62,6 @@
                     console.error('Error fetching file details:', error);
                 });
         }
-
     </script>
 </head>
 <body>
