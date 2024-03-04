@@ -28,30 +28,39 @@
             console.log('Updating HTML file...');
             console.log('API URL:', apiUrl);
 
-            fetch(apiUrl, {
-                method: 'PUT',
-                headers: {
-                    'Authorization': 'token ' + accessToken,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    "message": "Update index.html",
-                    "content": btoa(newContent),
-                    "sha": ""
-                })
+fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+        const sha = data.sha; // Retrieve the SHA hash from the response
+        // Make the PUT request with the retrieved SHA hash
+        fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': 'token ' + accessToken,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                "message": "Update index.html",
+                "content": btoa(newContent),
+                "sha": sha // Provide the SHA hash in the request body
             })
-            .then(response => {
-                console.log('Response:', response);
-                if (response.ok) {
-                    console.log('HTML file updated successfully.');
-                } else {
-                    console.error('Failed to update HTML file:', response.statusText);
-                }
-            })
-            .catch(error => {
-                console.error('Error updating HTML file:', error);
-            });
-        }
+        })
+        .then(response => {
+            console.log('Response:', response);
+            if (response.ok) {
+                console.log('HTML file updated successfully.');
+            } else {
+                console.error('Failed to update HTML file:', response.statusText);
+            }
+        })
+        .catch(error => {
+            console.error('Error updating HTML file:', error);
+        });
+    })
+    .catch(error => {
+        console.error('Error fetching file details:', error);
+    });
+
     </script>
 </head>
 <body>
