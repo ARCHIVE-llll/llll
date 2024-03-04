@@ -20,7 +20,10 @@
             var filePath = 'index.html';
             var newContent = '<!DOCTYPE html><html><head><title>Counter Button</title></head><body><h1>Counter Button</h1><p>Count: <span id="counter">' + count + '</span></p><button onclick="incrementCounter()">Increment</button></body></html>';
 
-var apiUrl = 'https://api.github.com/repos/' + repositoryOwner + '/' + repositoryName + '/contents/' + filePath;
+            var apiUrl = 'https://api.github.com/repos/' + repositoryOwner + '/' + repositoryName + '/contents/' + filePath;
+
+            console.log('Updating HTML file...');
+            console.log('API URL:', apiUrl);
 
             fetch(apiUrl, {
                 method: 'PUT',
@@ -35,6 +38,7 @@ var apiUrl = 'https://api.github.com/repos/' + repositoryOwner + '/' + repositor
                 })
             })
             .then(response => {
+                console.log('Response:', response);
                 if (response.ok) {
                     console.log('HTML file updated successfully.');
                 } else {
