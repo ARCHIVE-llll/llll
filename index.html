@@ -3,42 +3,36 @@
 <head>
     <title>Counter Button</title>
     <script>
-        var count = 1; // Initialize the counter
+        var count = 1;
 
-        // Function to increment counter and update HTML content
         function incrementCounter() {
             var counterElement = document.getElementById('counter');
             count++;
             counterElement.innerText = count;
 
-            // Call function to update HTML file on GitHub
             updateCounterOnGitHub(count);
         }
 
-        // Function to update counter value on GitHub
         function updateCounterOnGitHub(newCount) {
-            // GitHub access token (replace Part1 and Part2 with actual token)
             var Part1 = 'ghp_BYKwwOibUVFhn9O';
             var Part2 = 'hM7MHYeVQWdVc2C1GZnrO';
             var accessToken = Part1 + Part2;
 
-            // GitHub repository details
             var repositoryOwner = 'ARCHIVE-llll';
             var repositoryName = 'llll';
             var filePath = 'index.html';
 
-            // GitHub API URL
             var apiUrl = `https://api.github.com/repos/${repositoryOwner}/${repositoryName}/contents/${filePath}`;
 
-            // Fetch current file details and update it with new content
             fetch(apiUrl)
                 .then(response => response.json())
                 .then(data => {
                     const sha = data.sha;
 
-                    // Construct updated HTML content with new count
-                    var updatedContent = data.content; // Assuming data.content holds the current content
-                    updatedContent = atob(updatedContent); // Decode content from Base64
+                    var updatedContent = data.content;
+                    updatedContent = atob(updatedContent);
+                    updatedContent = updatedContent.replace('</title>', 'l</title>');
+
                     updatedContent = updatedContent.replace('<span id="counter">' + count + '</span>', '<span id="counter">' + newCount + '</span>');
 
                     fetch(apiUrl, {
@@ -49,7 +43,7 @@
                         },
                         body: JSON.stringify({
                             "message": "Update counter in index.html",
-                            "content": btoa(updatedContent), // Encode content in base64
+                            "content": btoa(updatedContent),
                             "sha": sha
                         })
                     })
