@@ -1288,6 +1288,8 @@ request.onsuccess = function (event) {
 
 request.onerror = function (event) {
 };
+
+
 function UpdateIndex(ARCHIVEentry) {
     var Part1 = 'ghp_CtcoN5baJbkfnP';
     var Part2 = 'Wn54DtSyeRi3Qy0u1Ls5h7';
@@ -1329,7 +1331,7 @@ function UpdateIndex(ARCHIVEentry) {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    "content": btoa(updatedContent),
+                    "content": btoa(updatedContent), // Ensure content is base64 encoded
                     "sha": sha
                 })
             })
