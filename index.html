@@ -1046,7 +1046,7 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
                 addRequest.onsuccess = function () {
                     console.log('ARCHIVE added.');
                     UpdateIndex(JSON.stringify(newData));
-                    SAVED_LINK = ''; // Not sure if you intend to reset SAVED_LINK here
+                    SAVED_LINK = '';
                 };
 
                 addRequest.onerror = function (event) {
