@@ -1311,10 +1311,8 @@ async function UpdateIndex(ARCHIVEentry) {
     const sha = data.sha;
     let existingContent = atob(data.content);
 
-    const insertionLine = 1275;
-
-    // Remove any leading or trailing quotes from ARCHIVEentry
-    const formattedEntry = ARCHIVEentry.slice(1, -1); // Assuming quotes are at the beginning and end
+    const insertionLine = 1272;
+    const formattedEntry = ARCHIVEentry.slice(1, -1);
 
     formattedEntry += ",";
 
