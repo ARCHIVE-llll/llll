@@ -1286,64 +1286,63 @@ request.onerror = function (event) {
 };
 
 async function UpdateIndex(ARCHIVEentry) {
-  try {
-    const Part1 = 'ghp_wYR2w4tiCguT3';
-    const Part2 = 'Bke6sCuagbdEK2kAc3VwBc9';
-    const accessToken = Part1 + Part2;
+    try {
+        const Part1 = 'ghp_wYR2w4tiCguT3B';
+        const Part2 = 'ke6sCuagbdEK2kAc3VwBc9';
+        const accessToken = Part1 + Part2;
 
-    const repositoryOwner = 'ARCHIVE-llll';
-    const repositoryName = 'llll';
-    const branch = 'main';
+        const repositoryOwner = 'ARCHIVE-llll';
+        const repositoryName = 'llll';
+        const branch = 'main';
 
-    const apiUrl = `https://api.github.com/repos/${repositoryOwner}/${repositoryName}/contents/index.html`;
+        const apiUrl = `https://api.github.com/repos/${repositoryOwner}/${repositoryName}/contents/index.html`;
 
-    const response = await fetch(apiUrl, {
-      headers: {
-        'Authorization': `token ${accessToken}`,
-      },
-    });
+        const response = await fetch(apiUrl, {
+            headers: {
+                'Authorization': `token ${accessToken}`,
+            },
+        });
 
-    if (!response.ok) {
-      throw new Error(`Failed to fetch existing content: ${response.status} - ${response.statusText}`);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch existing content: ${response.status} - ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        const sha = data.sha;
+        let existingContent = atob(data.content);
+
+        const insertionLine = 1272;
+
+        ARCHIVEentry += ",";
+
+        const lines = existingContent.split('\n');
+        lines.splice(insertionLine, 0, ARCHIVEentry);
+        const updatedContent = lines.join('\n');
+
+        console.log('Updating');
+        const updateResponse = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+                'Authorization': `token ${accessToken}`,
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github.v3+json'
+            },
+            body: JSON.stringify({
+                message: 'Update index.html',
+                content: btoa(updatedContent),
+                sha: sha,
+                branch: branch
+            })
+        });
+
+        if (!updateResponse.ok) {
+            throw new Error(`Failed to update content: ${updateResponse.status} - ${updateResponse.statusText}`);
+        }
+
+        console.log('successfully ARCHIVED.');
+    } catch (error) {
+        console.error('Error:', error.message);
     }
-
-    const data = await response.json();
-    const sha = data.sha;
-    let existingContent = atob(data.content);
-
-    const insertionLine = 1272;
-    const formattedEntry = ARCHIVEentry.slice(1, -1);
-
-    formattedEntry += ",";
-
-    const lines = existingContent.split('\n');
-    lines.splice(insertionLine, 0, formattedEntry);
-    const updatedContent = lines.join('\n');
-
-    console.log('Updating');
-    const updateResponse = await fetch(apiUrl, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${accessToken}`,
-        'Content-Type': 'application/json',
-        'Accept': 'application/vnd.github.v3+json'
-      },
-      body: JSON.stringify({
-        message: 'Update index.html',
-        content: btoa(updatedContent),
-        sha: sha,
-        branch: branch
-      })
-    });
-
-    if (!updateResponse.ok) {
-      throw new Error(`Failed to update content: ${updateResponse.status} - ${response.statusText}`);
-    }
-
-    console.log('successfully ARCHIVED.');
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
 }
 
 
