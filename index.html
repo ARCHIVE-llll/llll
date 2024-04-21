@@ -1086,22 +1086,17 @@ function FRAME(processedImageArray) {
             cursorRequest.onsuccess = function (event) {
                 const cursor = event.target.result;
                 if (cursor) {
-                    const entry = cursor.value;
-                    const weights = entry.weights;
-                    const link = entry.links;
+                    const weights = cursor.value.weights;
+                    const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray) && !isWindowOpen) {
-                        const newWindow = window.open(link, '_blank');
-                        if (newWindow) {
-                            isWindowOpen = true;
-                            setTimeout(function () {
-                                isWindowOpen = false;
-                                newWindow.close();
-                                location.reload();
-                            }, 3333);
-                        } else {
-                            console.error('Failed to open window.');
-                        }
+                        window.open(link, '_blank');
+                        isWindowOpen = true;
+
+                        setTimeout(function () {
+                            isWindowOpen = false;
+                            location.reload();
+                        }, 3333);
                     }
                     cursor.continue();
                 } else {
@@ -1121,6 +1116,9 @@ function FRAME(processedImageArray) {
         };
     });
 }
+
+
+
 
 //////FULLSCREEN LISTENER
 
