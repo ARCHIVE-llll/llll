@@ -1069,21 +1069,23 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
 }
 
 let isWindowOpen = false;
-let isProcessing = false; // Mutex to ensure exclusive access to FRAME
+let isProcessing = false;
 
 function FRAME(processedImageArray) {
-    // If another call to FRAME is already processing, return a resolved promise
+    // Check if function is already running, if so, return immediately
     if (isProcessing) {
         return Promise.resolve();
     }
 
-    isProcessing = true; // Acquire lock
+    // Set processing flag
+    isProcessing = true;
 
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
         request.onsuccess = function (event) {
             const db = event.target.result;
+
             const transaction = db.transaction(['data'], 'readonly');
             const objectStore = transaction.objectStore('data');
             const cursorRequest = objectStore.openCursor();
@@ -1119,10 +1121,14 @@ function FRAME(processedImageArray) {
             console.error('Error opening database:', event.target.error);
             reject(event.target.error);
         };
-    }).finally(() => {
-        isProcessing = false; // Release lock
+
+        // Reset processing flag when finished
+        request.onsuccess = request.onerror = function() {
+            isProcessing = false;
+        };
     });
 }
+
 
 
 
