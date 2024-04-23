@@ -1,5 +1,4 @@
 {
-    "manifest_version": 3, 
   "name": "ARCHIVE",  
   "short_name": "⧉",
   "icons": [
@@ -15,5 +14,6 @@
     }
   ],
   "start_url": "https://frame-archive.online/",
-  "display": "browser"
+"theme_color": "#000000",
+  "display": "standalone"
 }
