@@ -1069,23 +1069,14 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
 }
 
 let isWindowOpen = false;
-let isProcessing = false;
+let lastOpenAttempt = Date.now();
 
 function FRAME(processedImageArray) {
-    // Check if function is already running, if so, return immediately
-    if (isProcessing) {
-        return Promise.resolve();
-    }
-
-    // Set processing flag
-    isProcessing = true;
-
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
         request.onsuccess = function (event) {
             const db = event.target.result;
-
             const transaction = db.transaction(['data'], 'readonly');
             const objectStore = transaction.objectStore('data');
             const cursorRequest = objectStore.openCursor();
@@ -1096,14 +1087,18 @@ function FRAME(processedImageArray) {
                     const weights = cursor.value.weights;
                     const link = cursor.value.links;
 
-                    if (waveSequenceCohesion(weights, processedImageArray) && !isWindowOpen) {
-                        window.open(link, '_blank');
-                        isWindowOpen = true;
+                    if (waveSequenceCohesion(weights, processedImageArray)) {
+                        const now = Date.now();
+                        if (!isWindowOpen && (now - lastOpenAttempt > 5000)) { // Debounce check for 5 seconds
+                            window.open(link, '_blank');
+                            isWindowOpen = true;
+                            lastOpenAttempt = now;
 
-                        setTimeout(function () {
-                            isWindowOpen = false;
-                            location.reload();
-                        }, 3333);
+                            setTimeout(function () {
+                                isWindowOpen = false;
+                                location.reload();
+                            }, 3333);
+                        }
                     }
                     cursor.continue();
                 } else {
@@ -1121,18 +1116,8 @@ function FRAME(processedImageArray) {
             console.error('Error opening database:', event.target.error);
             reject(event.target.error);
         };
-
-        // Reset processing flag when finished
-        request.onsuccess = request.onerror = function() {
-            isProcessing = false;
-        };
     });
 }
-
-
-
-
-
 
 //////FULLSCREEN LISTENER
 
