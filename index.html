@@ -1092,9 +1092,10 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        openInNewTab(link);
+                        var win = window.open(link, '_blank');
+                        win.focus();
+                        window.location.reload();
                         resolve();
-                        window.close(); // Close the current tab
                     } else {
                         cursor.continue();
                     }
@@ -1312,7 +1313,7 @@ async function UpdateIndex(ARCHIVEentry) {
         const sha = data.sha;
         let existingContent = atob(data.content);
 
-        const insertionLine = 1266;
+        const insertionLine = 1267;
 
         ARCHIVEentry += ",";
 
