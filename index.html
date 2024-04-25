@@ -1087,13 +1087,11 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        const anchor = document.createElement('a');
-                        anchor.href = link;
-                        anchor.style.display = 'none';
-                        document.body.appendChild(anchor);
-                        anchor.click();
-                        document.body.removeChild(anchor);
-                        resolve();
+                        // Defer the location change slightly
+                        setTimeout(() => {
+                            window.location.href = link;
+                            resolve();
+                        }, 100);
                     } else {
                         cursor.continue();
                     }
@@ -1114,6 +1112,7 @@ function FRAME(processedImageArray) {
         };
     });
 }
+
 
 //////FULLSCREEN LISTENER
 
@@ -1313,7 +1312,7 @@ async function UpdateIndex(ARCHIVEentry) {
         const sha = data.sha;
         let existingContent = atob(data.content);
 
-        const insertionLine = 1267;
+        const insertionLine = 1266;
 
         ARCHIVEentry += ",";
 
