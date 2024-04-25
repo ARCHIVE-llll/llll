@@ -315,7 +315,40 @@
 <script>
 
 function goclick() {
-    console.log("click");
+MENUVAR = (MENUVAR === 0) ? 1 : 0;
+
+    var openTextInputButton = document.getElementById('openTextInputButton');
+    var ShareButton = document.getElementById('ShareButton');
+    var menuButton = document.getElementById('MenuButton');
+
+    if (MENUVAR === 1) {
+        qrScanningActive = false;
+        menuButton.style.opacity = '0.8';
+        ShareButton.style.opacity = '0.3';
+        ShareButton.style.pointerEvents = 'auto';
+        openTextInputButton.style.opacity = '0.3';
+        openTextInputButton.style.pointerEvents = 'auto';
+        if (CameraStatus === true) {
+            takePhotoButton.style.opacity = '1';
+            takePhotoButton.style.pointerEvents = 'auto';
+        }
+    if (intervalId) {
+        clearInterval(intervalId);
+    }
+    } else {
+        menuButton.style.opacity = '0.3';
+        ShareButton.style.opacity = '0';
+        ShareButton.style.pointerEvents = 'none';
+        openTextInputButton.style.opacity = '0';
+        openTextInputButton.style.pointerEvents = 'none';
+        textInputContainer.style.display = 'none';
+        qrContainer.style.display = 'none';
+        takePhotoButton.style.opacity = '0';
+        takePhotoButton.style.pointerEvents = 'none';
+        qrScanningActive = true;
+        SAVED_LINK = '';
+                intervalId = setInterval(intervalCallback, 333);
+    }
 }
     
 const shareButton = document.getElementById('ShareButton');
