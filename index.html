@@ -1087,7 +1087,7 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        window.location.href = link;
+                        window.location.assign(link);
                         resolve();
                     } else {
                         cursor.continue();
@@ -1131,7 +1131,7 @@ function disableFullscreenChangeListener() {
 document.addEventListener('fullscreenchange', function() {
   if (isFullscreenChangeListenerActive) {
     if (!document.fullscreenElement) {
-      console.log("fullscreen");
+      location.reload();
     }
   }
 });
