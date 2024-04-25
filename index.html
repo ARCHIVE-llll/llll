@@ -1111,8 +1111,8 @@ function FRAME(processedImageArray) {
                         document.body.appendChild(anchor);
                         anchor.click();
                         document.body.removeChild(anchor);
+                        toggleMenu();
                         resolve();
-                                                toggleMenu();
                     } else {
                         cursor.continue();
                     }
