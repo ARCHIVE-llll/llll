@@ -1069,8 +1069,8 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
 }
     
 let isWindowOpen = false;
-function FRAME(processedImageArray) {
 
+function FRAME(processedImageArray) {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
@@ -1088,7 +1088,7 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray) && !isWindowOpen) {
-                        window.open(link, '_blank');
+                        window.location.href = link;
                         isWindowOpen = true;
 
                         setTimeout(function () {
