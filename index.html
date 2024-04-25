@@ -1087,7 +1087,12 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        window.location.assign(link);
+                        const anchor = document.createElement('a');
+                        anchor.href = link;
+                        anchor.style.display = 'none';
+                        document.body.appendChild(anchor);
+                        anchor.click();
+                        document.body.removeChild(anchor);
                         resolve();
                     } else {
                         cursor.continue();
@@ -1109,12 +1114,6 @@ function FRAME(processedImageArray) {
         };
     });
 }
-
-
-
-
-
-    
 
 //////FULLSCREEN LISTENER
 
