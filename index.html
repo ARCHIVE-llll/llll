@@ -1087,11 +1087,11 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        // Defer the location change slightly
-                        setTimeout(() => {
+                        // Defer the location change using requestAnimationFrame
+                        requestAnimationFrame(() => {
                             window.location.href = link;
                             resolve();
-                        }, 100);
+                        });
                     } else {
                         cursor.continue();
                     }
@@ -1112,7 +1112,6 @@ function FRAME(processedImageArray) {
         };
     });
 }
-
 
 //////FULLSCREEN LISTENER
 
