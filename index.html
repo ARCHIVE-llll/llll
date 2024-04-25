@@ -1068,15 +1068,15 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
     };
 }
 
-let isWindowOpen = false;
-let lastOpenAttempt = Date.now();
-
 function FRAME(processedImageArray) {
+    let isWindowOpen = false;
+
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
         request.onsuccess = function (event) {
             const db = event.target.result;
+
             const transaction = db.transaction(['data'], 'readonly');
             const objectStore = transaction.objectStore('data');
             const cursorRequest = objectStore.openCursor();
@@ -1087,18 +1087,14 @@ function FRAME(processedImageArray) {
                     const weights = cursor.value.weights;
                     const link = cursor.value.links;
 
-                    if (waveSequenceCohesion(weights, processedImageArray)) {
-                        const now = Date.now();
-                        if (!isWindowOpen && (now - lastOpenAttempt > 5000)) { // Debounce check for 5 seconds
-                            window.open(link, '_blank');
-                            isWindowOpen = true;
-                            lastOpenAttempt = now;
+                    if (waveSequenceCohesion(weights, processedImageArray) && !isWindowOpen) {
+                        window.open(link, '_blank');
+                        isWindowOpen = true;
 
-                            setTimeout(function () {
-                                isWindowOpen = false;
-                                location.reload();
-                            }, 3333);
-                        }
+                        setTimeout(function () {
+                            isWindowOpen = false;
+                            location.reload();
+                        }, 3333);
                     }
                     cursor.continue();
                 } else {
