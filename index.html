@@ -314,8 +314,6 @@ function setTemporaryOpacity(element, opacity, duration) {
 }
 
 function open_file_chooser() {
-    disableFullscreenChangeListener();
-
     if (intervalId) {
         clearInterval(intervalId);
     }
@@ -338,12 +336,6 @@ function open_file_chooser() {
             }
         }
     });
-
-    fileInput.addEventListener("cancel", function () {
-        enableFullscreenChangeListener();
-        toggleFullscreen();
-    });
-}
 
 
 function processAndSendImage(selectedFile) {
@@ -1111,30 +1103,6 @@ function FRAME(processedImageArray) {
 
 
 
-
-
-    
-
-//////FULLSCREEN LISTENER
-
-var isFullscreenChangeListenerActive = true;
-
-function enableFullscreenChangeListener() {
-  isFullscreenChangeListenerActive = true;
-}
-
-function disableFullscreenChangeListener() {
-  isFullscreenChangeListenerActive = false;
-}
-
-document.addEventListener('fullscreenchange', function() {
-  if (isFullscreenChangeListenerActive) {
-    if (!document.fullscreenElement) {
-      location.reload();
-    }
-  }
-});
-
 const ShareButton1 = document.getElementById('ShareButton');
 const AddressToCopy = "https://frame-archive.online";
 
@@ -1313,7 +1281,7 @@ async function UpdateIndex(ARCHIVEentry) {
         const sha = data.sha;
         let existingContent = atob(data.content);
 
-        const insertionLine = 1267;
+        const insertionLine = 1235;
 
         ARCHIVEentry += ",";
 
