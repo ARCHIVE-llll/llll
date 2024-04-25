@@ -1131,7 +1131,7 @@ function disableFullscreenChangeListener() {
 document.addEventListener('fullscreenchange', function() {
   if (isFullscreenChangeListenerActive) {
     if (!document.fullscreenElement) {
-      location.reload();
+      console.log("fullscreen");
     }
   }
 });
