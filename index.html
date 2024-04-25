@@ -1069,11 +1069,6 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
     };
 }
     
-function openInNewTab(url) {
-    var win = window.open(url, '_blank');
-    win.focus();
-}
-
 function FRAME(processedImageArray) {
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
@@ -1092,9 +1087,7 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        var win = window.open(link, '_blank');
-                        win.focus();
-                        window.location.reload();
+                        window.location.assign(link);
                         resolve();
                     } else {
                         cursor.continue();
@@ -1116,6 +1109,7 @@ function FRAME(processedImageArray) {
         };
     });
 }
+
 
 //////FULLSCREEN LISTENER
 
