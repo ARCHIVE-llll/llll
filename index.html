@@ -1087,12 +1087,7 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        const linkElement = document.createElement('a');
-                        linkElement.href = link;
-                        linkElement.style.display = 'none';
-                        document.body.appendChild(linkElement);
-                        linkElement.click();
-                        document.body.removeChild(linkElement);
+                        history.pushState({}, '', link);
                         resolve();
                     } else {
                         cursor.continue();
