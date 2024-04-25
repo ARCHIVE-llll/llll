@@ -1105,7 +1105,6 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        // Create an anchor element and programmatically click it
                         const anchor = document.createElement('a');
                         anchor.href = link;
                         anchor.style.display = 'none';
@@ -1113,6 +1112,7 @@ function FRAME(processedImageArray) {
                         anchor.click();
                         document.body.removeChild(anchor);
                         resolve();
+                                                toggleMenu();
                     } else {
                         cursor.continue();
                     }
