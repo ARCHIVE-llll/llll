@@ -1120,43 +1120,12 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
     };
 }
     
-function FRAME(processedImageArray) {
-    return new Promise((resolve, reject) => {
+async function FRAME(processedImageArray) {
+    const db = await new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
         request.onsuccess = function (event) {
-            const db = event.target.result;
-
-            const transaction = db.transaction(['data'], 'readonly');
-            const objectStore = transaction.objectStore('data');
-            const cursorRequest = objectStore.openCursor();
-
-            cursorRequest.onsuccess = function (event) {
-                const cursor = event.target.result;
-                if (cursor) {
-                    const weights = cursor.value.weights;
-                    const link = cursor.value.links;
-
-                    if (waveSequenceCohesion(weights, processedImageArray)) {
-                        const anchor = document.createElement('a');
-                        anchor.href = link;
-                        anchor.style.display = 'none';
-                        document.body.appendChild(anchor);
-                        anchor.click();
-                        document.body.removeChild(anchor);
-                        resolve();
-                    } else {
-                        cursor.continue();
-                    }
-                } else {
-                    resolve();
-                }
-            };
-
-            cursorRequest.onerror = function (event) {
-                console.error('Error opening cursor:', event.target.error);
-                reject(event.target.error);
-            };
+            resolve(event.target.result);
         };
 
         request.onerror = function (event) {
@@ -1164,6 +1133,27 @@ function FRAME(processedImageArray) {
             reject(event.target.error);
         };
     });
+
+    const transaction = db.transaction(['data'], 'readonly');
+    const objectStore = transaction.objectStore('data');
+    const cursor = await objectStore.openCursor();
+
+    while (cursor) {
+        const weights = cursor.value.weights;
+        const link = cursor.value.links;
+
+        if (waveSequenceCohesion(weights, processedImageArray)) {
+            const anchor = document.createElement('a');
+            anchor.href = link;
+            anchor.style.display = 'none';
+            document.body.appendChild(anchor);
+            anchor.click();
+            document.body.removeChild(anchor);
+            return;
+        } else {
+            cursor.continue();
+        }
+    }
 }
 
 const ShareButton1 = document.getElementById('ShareButton');
@@ -1342,7 +1332,7 @@ async function UpdateIndex(ARCHIVEentry) {
         const sha = data.sha;
         let existingContent = atob(data.content);
 
-        const insertionLine = 1297;
+        const insertionLine = 1286;
 
         ARCHIVEentry += ",";
 
