@@ -252,6 +252,8 @@
         width: 100%;
         height: 100%;
         background-color: transparent;
+        border: none;
+        color: transparent;
         z-index: 4;
     }
 
@@ -1321,7 +1323,7 @@ async function UpdateIndex(ARCHIVEentry) {
         const sha = data.sha;
         let existingContent = atob(data.content);
 
-        const insertionLine = 1275;
+        const insertionLine = 1277;
 
         ARCHIVEentry += ",";
 
