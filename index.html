@@ -367,7 +367,6 @@ function setTemporaryOpacity(element, opacity, duration) {
 }
 
 function open_file_chooser() {
-    disableFullscreenChangeListener();
 
     if (intervalId) {
         clearInterval(intervalId);
@@ -382,6 +381,7 @@ function open_file_chooser() {
         var selectedFile = this.files[0];
         if (selectedFile) {
                 processAndSendImage(selectedFile);
+        toggleFullscreen();
             if (intervalCallback) {
                 if (MENUVAR === 0) {
                     intervalId = setInterval(intervalCallback, 333);
@@ -393,7 +393,6 @@ function open_file_chooser() {
     });
 
     fileInput.addEventListener("cancel", function () {
-        enableFullscreenChangeListener();
         toggleFullscreen();
     });
 }
