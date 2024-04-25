@@ -338,7 +338,6 @@ function open_file_chooser() {
         }
     });
 
-
 function processAndSendImage(selectedFile) {
     var canvas = document.createElement("canvas");
     var ctx = canvas.getContext("2d");
@@ -368,7 +367,6 @@ function processAndSendImage(selectedFile) {
 
     img.src = URL.createObjectURL(selectedFile);
 }
-
 
 const openTextInputButton = document.getElementById('openTextInputButton');
 const textInputContainer = document.getElementById('textInputContainer');
@@ -524,21 +522,6 @@ document.addEventListener('touchend', (event) => {
 });
 
 startCameraButton.addEventListener('click', startCamera);
-
-
-function toggleFullscreen() {
-            const docElement = document.documentElement;
-
-            if (docElement.requestFullscreen) {
-                if (document.fullscreenElement) {
-                    document.exitFullscreen();
-                } else {
-                    docElement.requestFullscreen().catch(err => {
-                        console.error('Error attempting to enable fullscreen:', err);
-                    });
-                }
-            }
-        }
 
 function takePhoto() {
     if (stream) {
@@ -1004,7 +987,6 @@ function imageToFlatArray(imageData) {
     return flatArray;
 }
 
-
 function waveSequenceCohesion(weights, processedImageArray) {
     for (let i = 0; i < processedImageArray.length; i++) {
         if (Math.abs(processedImageArray[i] - weights[i]) >= 54) {
@@ -1102,8 +1084,6 @@ function FRAME(processedImageArray) {
     });
 }
 
-
-
 const ShareButton1 = document.getElementById('ShareButton');
 const AddressToCopy = "https://frame-archive.online";
 
@@ -1116,7 +1096,6 @@ ShareButton.addEventListener('click', function () {
     document.execCommand('copy');
     document.body.removeChild(textarea);
 });
-
 
 var MENUVAR = 0
 
