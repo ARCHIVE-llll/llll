@@ -1087,15 +1087,13 @@ function FRAME(processedImageArray) {
                     const link = cursor.value.links;
 
                     if (waveSequenceCohesion(weights, processedImageArray)) {
-                        // Create a hidden iframe and change its src to trigger navigation
-                        const iframe = document.createElement('iframe');
-                        iframe.style.display = 'none';
-                        document.body.appendChild(iframe);
-                        iframe.onload = function() {
-                            document.body.removeChild(iframe);
-                            resolve();
-                        };
-                        iframe.src = link;
+                        const linkElement = document.createElement('a');
+                        linkElement.href = link;
+                        linkElement.style.display = 'none';
+                        document.body.appendChild(linkElement);
+                        linkElement.click();
+                        document.body.removeChild(linkElement);
+                        resolve();
                     } else {
                         cursor.continue();
                     }
@@ -1116,7 +1114,6 @@ function FRAME(processedImageArray) {
         };
     });
 }
-
 
 //////FULLSCREEN LISTENER
 
