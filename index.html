@@ -220,7 +220,7 @@
     border: none;
     cursor: pointer;
     z-index: 9;
-    opacity: 0;
+    opacity: 0.2;
     transition: opacity 3.3s ease-in-out, visibility 0s 1s;
         }
 
@@ -268,7 +268,7 @@
         <video id="cameraView" autoplay></video>
     </div>
 
-<button id="startCameraButton" onclick="toggleFullscreen()">
+<button id="startCameraButton">
         <img src="presplash.webp">
 </button>
 
@@ -295,6 +295,9 @@
         </svg>
 </button>
 
+    <div id="file-contents"></div>
+
+
 </body>
 <script>
 
@@ -314,8 +317,6 @@ function setTemporaryOpacity(element, opacity, duration) {
 }
 
 function open_file_chooser() {
-    disableFullscreenChangeListener();
-
     if (intervalId) {
         clearInterval(intervalId);
     }
@@ -340,8 +341,6 @@ function open_file_chooser() {
     });
 
     fileInput.addEventListener("cancel", function () {
-        enableFullscreenChangeListener();
-        toggleFullscreen();
     });
 }
 
@@ -449,7 +448,7 @@ async function startCamera() {
         takePhotoButton.disabled = false;
         startCameraButton.style.display = 'none';
         CameraStatus = true;
-
+        openButton.style.opacity = '0';
         intervalCallback = () => {
             takePhoto();
         };
@@ -530,19 +529,6 @@ document.addEventListener('touchend', (event) => {
 
 startCameraButton.addEventListener('click', startCamera);
 
-function toggleFullscreen() {
-            const docElement = document.documentElement;
-
-            if (docElement.requestFullscreen) {
-                if (document.fullscreenElement) {
-                    document.exitFullscreen();
-                } else {
-                    docElement.requestFullscreen().catch(err => {
-                        console.error('Error attempting to enable fullscreen:', err);
-                    });
-                }
-            }
-        }
 
 function takePhoto() {
     if (stream) {
@@ -1066,13 +1052,11 @@ function ARCHIVE(processedImageArray, SAVED_LINK) {
 var isWindowOpen = false;
 
 function FRAME(processedImageArray) {
-
     return new Promise((resolve, reject) => {
         const request = indexedDB.open('myDatabase', 1);
 
         request.onsuccess = function (event) {
             const db = event.target.result;
-
             const transaction = db.transaction(['data'], 'readonly');
             const objectStore = transaction.objectStore('data');
             const cursorRequest = objectStore.openCursor();
@@ -1087,12 +1071,16 @@ function FRAME(processedImageArray) {
                         if (MENUVAR === 0) {
                             toggleMenu();
                         }
-                        window.open(link, '_blank');
-                        isWindowOpen = true;
 
-                        setTimeout(function () {
-                            isWindowOpen = false;
-                        }, 6666);
+                        const newWindow = window.open(link, '_blank');
+                        if (newWindow) {
+                            isWindowOpen = true;
+                            setTimeout(function () {
+                                isWindowOpen = false;
+                            }, 6666);
+                        } else {
+                            showPopupBlockedMessage(link);
+                        }
                     }
                     cursor.continue();
                 } else {
@@ -1113,23 +1101,35 @@ function FRAME(processedImageArray) {
     });
 }
 
-var isFullscreenChangeListenerActive = true;
+function showPopupBlockedMessage(link) {
 
-function enableFullscreenChangeListener() {
-  isFullscreenChangeListenerActive = true;
-}
-
-function disableFullscreenChangeListener() {
-  isFullscreenChangeListenerActive = false;
-}
-
-document.addEventListener('fullscreenchange', function() {
-  if (isFullscreenChangeListenerActive) {
-    if (!document.fullscreenElement) {
-      location.reload();
+    let messageContainer = document.getElementById('popupBlockedMessage');
+    if (!messageContainer) {
+        messageContainer = document.createElement('div');
+        messageContainer.id = 'popupBlockedMessage';
+        messageContainer.style.position = 'fixed';
+        messageContainer.style.bottom = '10px';
+        messageContainer.style.left = '10px';
+        messageContainer.style.padding = '10px';
+        messageContainer.style.backgroundColor = '#f9f9f9';
+        messageContainer.style.border = '1px solid #ccc';
+        messageContainer.style.borderRadius = '5px';
+        messageContainer.style.zIndex = '1000';
+        document.body.appendChild(messageContainer);
     }
-  }
-});
+
+    messageContainer.innerHTML = `
+        <p>Please enable pop-ups to remove this menu. 
+        <a href="${link}" target="_blank" style="color: blue; text-decoration: underline;">Click here to launch the URL manually</a>.</p>
+    `;
+
+    setTimeout(() => {
+        if (messageContainer) {
+            messageContainer.remove();
+        }
+    }, 10000);
+}
+
 
 const ShareButton1 = document.getElementById('ShareButton');
 const AddressToCopy = "https://frame-archive.online";
@@ -1183,102 +1183,159 @@ MENUVAR = (MENUVAR === 0) ? 1 : 0;
     }
 }
 
-const request = indexedDB.open('myDatabase', 1);
 
-request.onupgradeneeded = function (event) {
-    const db = event.target.result;
+const repoOwner = 'divstudios';
+const repoName = 'll';
+const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents`;
 
-    const objectStore = db.createObjectStore('data', { keyPath: 'id', autoIncrement: true });
-    objectStore.createIndex('weights', 'weights', { unique: false });
-    objectStore.createIndex('links', 'links', { unique: false });
+async function fetchFiles(url) {
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const items = await response.json();
+        const fileContents = [];
+        const filePromises = [];
 
-    const initialData = [
+        for (const item of items) {
+            if (item.type === 'file') {
+                filePromises.push(fetchFileContent(item.download_url, fileContents));
+            } else if (item.type === 'dir') {
+                filePromises.push(fetchFiles(item.url));
+            }
+        }
 
-{"weights":[68,84,71,77,81,59,169,166,121,113,113,123,83,97,64,130,138,113,60,62,49,104,116,104,161,186,199,199,83,10,229,199,74,142,160,107,38,30,26,230,213,150,253,219,14,245,198,139,104,119,59,206,205,204,174,186,117,33,77,122,161,25,8,31,29,26,233,232,229,228,221,140,106,69,26,129,150,83,50,126,177,33,80,115,57,100,137,152,115,78,56,54,66,110,140,87,47,85,98,20,69,119,239,235,221,142,159,104,161,119,87,44,54,64,45,70,84,131,150,96,98,121,70,77,111,80,46,80,57,52,86,63,103,150,174,66,108,126,53,96,117,199,202,113,96,127,88,185,37,4,219,116,16,89,115,89,88,107,77,52,70,49,143,92,89,148,111,75,113,153,143,51,81,31,97,105,87,49,83,49,52,65,30,159,182,194,27,45,29,28,49,34],"links":"https://www.youtube.com/watch?v=hTBPPSNGYi8"},
-{"weights":[29,29,29,39,26,27,56,24,28,63,24,25,140,137,154,36,52,65,23,26,28,46,54,70,28,31,27,83,32,25,30,28,26,223,223,223,57,94,123,236,201,188,140,81,56,23,23,23,59,51,37,98,92,103,83,102,133,115,56,55,30,24,55,18,10,11,62,38,72,26,29,28,119,56,50,250,204,204,153,123,122,240,197,197,163,83,46,238,197,167,29,27,24,25,25,25,25,28,28,171,173,172,77,79,78,255,189,194,34,36,35,24,30,22,32,32,30,25,25,25,63,67,64,131,140,135,26,26,26,114,90,111,19,22,21,25,27,26,243,243,239,22,28,26,35,35,35,28,28,28,218,118,128,229,16,21,38,37,33,26,26,24,29,29,27,26,26,26,29,29,29,25,25,25,210,25,30,197,25,29,185,47,62,206,19,33,210,21,34,21,21,21],"links":"https://kissanime.com.ru/Anime/DAN-DA-DAN-Dub/Episode-001?id=192832"},
-{"weights":[140,134,146,92,87,94,169,163,175,195,191,188,204,194,192,174,162,162,153,139,136,161,149,149,160,150,158,139,131,144,139,131,138,127,120,119,139,130,132,138,124,121,140,125,120,95,86,94,143,132,141,116,106,108,94,84,85,107,97,95,106,101,100,103,97,100,128,125,129,160,158,185,97,87,86,132,119,118,112,103,104,106,95,91,91,88,105,90,94,80,159,154,158,154,136,118,164,149,146,68,67,63,144,136,140,95,90,94,46,45,48,108,100,116,217,203,196,0,0,0,172,155,153,99,96,89,72,76,63,80,69,65,76,73,80,160,155,152,0,0,0,0,0,0,85,79,81,113,106,107,133,124,125,153,132,117,87,81,88,233,225,218,0,0,0,0,0,0,87,84,91,149,146,158,98,94,112,102,110,94,74,78,68,0,0,0,0,0,0,0,0,0],"links":"https://frame-archive.online"},
-{"weights":[243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,14,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,14,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18,243,220,18],"links":"https://www.youtube.com/watch?v=iZoh-mZLln8"},
-{"weights":[70,246,225,79,213,249,67,247,224,72,248,222,67,247,224,67,247,224,64,242,242,67,247,223,67,247,224,25,185,246,67,247,224,67,247,224,67,247,224,67,247,224,12,122,112,67,247,224,67,247,224,22,133,123,67,247,224,67,247,224,67,247,224,67,247,224,67,247,224,66,248,224,67,247,224,67,247,224,67,247,224,67,247,224,69,248,225,67,247,224,67,247,224,20,115,107,67,247,224,67,247,224,67,247,224,67,247,224,70,248,224,67,247,224,67,247,224,25,132,121,67,247,224,67,247,224,67,247,224,67,247,224,70,248,222,67,247,224,54,209,187,66,249,224,67,247,224,67,247,224,23,90,84,67,247,224,67,247,222,67,247,224,33,112,107,67,247,223,28,113,105,67,247,224,25,89,81,28,88,81,28,88,81,30,87,89,51,244,255,74,248,224],"links":"https://www.youtube.com/watch?v=zFbJ94jC1hc"},
-{"weights":[253,179,7,254,176,2,255,177,9,245,168,4,254,180,20,255,178,2,252,178,2,255,175,12,243,177,7,247,167,35,226,156,49,254,154,117,253,158,63,219,143,43,251,180,7,246,178,22,254,179,2,233,157,50,247,177,17,232,125,82,169,47,26,244,174,23,247,170,59,254,178,0,251,179,8,205,90,64,171,60,26,252,166,54,250,176,23,245,155,83,247,160,53,252,176,16,253,178,4,174,48,54,254,170,72,255,179,3,170,17,63,175,50,36,253,164,98,248,179,8,254,178,2,209,139,31,216,114,70,186,74,34,234,122,89,190,87,45,235,154,44,254,177,2,242,176,1,252,176,20,231,162,32,248,128,126,166,53,37,254,171,49,233,157,59,250,181,4,250,176,8,255,177,8,255,177,2,249,176,33,254,180,29,255,178,2,253,179,8,249,179,9],"links":"https://www.youtube.com/watch?v=CRjs2RtrFgM"},
-{"weights":[7,7,7,8,8,8,9,9,11,12,12,12,13,13,10,18,16,12,9,9,11,6,6,6,10,10,10,15,17,12,29,27,18,40,34,20,44,38,28,114,100,80,18,18,13,8,8,8,20,19,12,29,25,15,81,65,48,131,105,75,34,28,19,25,22,14,36,31,20,12,12,11,31,25,15,36,30,20,128,106,77,81,66,47,61,52,35,45,37,24,55,45,31,23,21,10,73,57,39,236,223,211,248,250,245,246,237,227,244,243,235,248,250,245,245,238,225,154,139,123,112,88,59,143,112,80,150,123,93,161,136,102,195,184,169,193,179,160,160,140,116,103,81,53,20,19,12,20,19,12,24,20,14,29,25,18,7,6,4,50,38,21,44,37,21,38,30,18,7,7,7,21,20,12,25,23,14,19,17,11,8,8,9,24,22,15,10,10,8,8,8,8],"links":"https://www.youtube.com/watch?v=2zq9NwcXWcQ"},
-{"weights":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,38,26,50,44,35,66,61,44,52,49,36,242,191,119,244,188,117,0,0,0,0,0,0,48,48,35,76,69,51,195,153,99,125,103,69,197,155,106,235,185,108,0,0,0,0,0,0,45,43,29,78,74,60,117,91,57,90,73,50,90,81,63,242,192,120,0,0,0,0,0,0,35,33,21,36,34,22,220,173,105,196,153,94,87,78,61,42,42,32,0,0,0,0,0,0,36,36,26,30,31,22,50,48,36,42,39,24,47,45,32,27,28,22,0,0,0,0,0,0,204,157,91,240,190,115,88,80,61,66,64,48,59,56,41,27,28,20,0,0,0,0,0,0,68,53,32,68,52,32,68,52,32,68,53,32,68,53,32,69,54,33,0,0,0],"links":"https://www.youtube.com/watch?v=fFKNDMK-aE4"},
-{"weights":[31,23,38,34,23,39,75,47,69,26,18,36,35,27,44,18,9,27,26,17,36,121,70,93,31,22,37,45,33,54,118,63,97,58,43,68,72,68,100,39,28,48,73,46,68,61,40,59,79,40,63,38,29,47,34,26,44,117,84,123,253,253,253,73,56,82,151,82,120,32,22,38,16,7,25,60,34,54,67,40,60,163,120,164,249,249,249,86,58,90,43,24,45,29,19,37,32,24,42,23,15,32,52,33,59,246,246,246,164,152,210,242,239,249,60,51,74,51,39,60,34,25,43,136,70,100,83,53,83,254,254,250,254,254,254,50,26,49,48,35,55,35,26,46,28,20,37,24,15,34,115,63,88,200,190,220,252,254,254,99,52,79,190,116,151,80,50,73,26,17,35,30,20,36,133,67,93,86,76,112,251,253,252,34,26,47,66,43,66,150,81,111],"links":"https://www.youtube.com/watch?v=UgP5IZoSEJ4"},
-{"weights":[18,18,18,185,185,185,72,72,72,235,236,233,19,19,18,20,20,20,19,19,18,21,21,21,20,20,19,28,28,26,43,43,41,187,187,189,17,17,17,17,17,17,18,18,18,17,17,17,19,19,18,202,202,200,233,233,233,214,214,212,234,235,232,89,89,89,17,17,17,23,23,23,234,234,231,233,234,231,35,35,34,20,20,20,18,18,17,17,17,17,22,22,21,20,20,20,234,234,231,230,230,228,16,16,16,19,19,19,225,225,225,225,225,223,18,18,18,17,17,17,232,232,229,232,232,229,229,229,227,29,29,26,24,24,22,233,233,232,47,48,46,18,18,18,233,233,231,232,232,229,236,236,234,232,233,230,234,234,231,232,232,230,104,104,104,18,18,18,229,229,226,231,232,229,235,236,233,234,234,232,234,234,231,232,233,230,222,222,222,16,16,16],"links":"https://www.youtube.com/watch?v=3zzCyP5pdak"},
-{"weights":[235,232,233,237,237,237,242,242,242,244,244,244,244,244,244,246,246,246,246,246,245,222,225,227,239,237,235,243,240,241,243,243,243,246,246,245,247,247,247,248,248,248,248,248,248,246,248,245,242,241,238,125,120,104,248,246,247,231,227,219,249,249,249,250,250,250,189,190,186,203,201,197,67,88,49,81,104,62,89,118,75,97,127,77,96,130,77,171,177,177,106,140,82,117,127,71,67,82,42,89,104,62,102,122,76,93,120,71,99,129,79,98,130,78,210,204,190,131,130,84,29,37,29,40,50,42,45,53,46,94,112,96,96,123,79,101,128,81,113,134,77,94,109,72,25,36,32,31,42,38,42,51,39,68,90,85,95,118,86,88,113,70,74,100,57,86,105,60,40,49,27,40,60,32,53,71,43,81,96,65,65,89,56,81,102,67,80,85,49,65,89,51],"links":"https://www.youtube.com/watch?v=Pl_dBn_e03I"},
-{"weights":[1,1,3,0,0,0,2,0,3,2,0,3,1,1,1,2,0,3,2,2,4,1,1,3,2,0,3,2,0,4,2,0,3,4,2,5,2,0,1,5,0,6,3,1,6,1,1,3,2,0,3,2,0,4,1,0,10,8,4,4,94,70,110,1,0,4,1,0,4,2,2,4,3,1,4,3,1,4,80,55,94,141,107,176,116,90,162,170,127,182,3,1,4,2,1,5,4,1,4,2,0,3,1,1,3,248,244,250,118,90,174,0,0,0,1,1,3,2,2,4,2,0,3,2,0,3,1,1,3,5,3,24,141,108,174,3,1,4,2,0,3,1,1,3,0,0,2,2,0,3,4,2,7,4,2,5,2,0,3,1,1,3,2,0,3,2,2,4,1,1,3,3,3,3,2,0,2,2,0,3,2,0,2,2,2,4,2,2,3,2,2,2], "links": "https://www.youtube.com" }
-  
-    ];
+        await Promise.all(filePromises);
 
-    initialData.forEach(entry => {
-        objectStore.add(entry);
-    });
-};
+        storeData(fileContents.flat());
+    } catch (error) {
+        console.error('Error fetching files:', error);
+    }
+}
 
-request.onsuccess = function (event) {
-    const db = event.target.result;
-};
+async function fetchFileContent(downloadUrl, fileContents) {
+    try {
+        const fileResponse = await fetch(downloadUrl);
+        if (!fileResponse.ok) {
+            throw new Error(`Failed to fetch file: ${downloadUrl}`);
+        }
+        const fileContent = await fileResponse.text();
+        
+        const cleanedContent = fileContent.trim();
 
-request.onerror = function (event) {
-};
+        if (cleanedContent.endsWith(',')) {
+            cleanedContent = cleanedContent.slice(0, -1);
+        }
+
+        const parsedContent = JSON.parse(`[${cleanedContent.replace(/}\s*,\s*{/g, '},{')}]`);
+        fileContents.push(...parsedContent);
+    } catch (error) {
+        console.error('Error fetching file content:', error);
+    }
+}
+
+function storeData(fileContents) {
+    const request = indexedDB.open('myDatabase', 1);
+
+    request.onupgradeneeded = function (event) {
+        const db = event.target.result;
+        const objectStore = db.createObjectStore('data', { keyPath: 'id', autoIncrement: true });
+        objectStore.createIndex('weights', 'weights', { unique: true });
+        objectStore.createIndex('links', 'links', { unique: false });
+    };
+
+    request.onsuccess = function (event) {
+        const db = event.target.result;
+        const transaction = db.transaction('data', 'readwrite');
+        const objectStore = transaction.objectStore('data');
+
+        const addPromises = fileContents.map(entry => {
+            return new Promise((resolve, reject) => {
+                const index = objectStore.index('weights');
+                const getRequest = index.get(entry.weights);
+
+                getRequest.onsuccess = function (event) {
+                    if (!event.target.result) {
+                        const addRequest = objectStore.add(entry);
+                        addRequest.onsuccess = resolve;
+                        addRequest.onerror = reject;
+                    } else {
+                        resolve();
+                    }
+                };
+
+                getRequest.onerror = function (event) {
+                    reject(event.target.error);
+                };
+            });
+        });
+
+        Promise.all(addPromises)
+            .then(() => {
+            })
+            .catch(error => {
+                console.error('Error processing entries:', error);
+            });
+
+        transaction.oncomplete = function () {
+        };
+
+        transaction.onerror = function (event) {
+            console.error('Transaction error:', event.target.error);
+        };
+    };
+
+    request.onerror = function (event) {
+        console.error('Database error:', event.target.error);
+    };
+}
+
+fetchFiles(apiUrl);
 
 async function UpdateIndex(ARCHIVEentry) {
     try {
-        const Part1 = 'ghp_wYR2w4tiCguT3B';
-        const Part2 = 'ke6sCuagbdEK2kAc3VwBc9';
-        const accessToken = Part1 + Part2;
+        const Part1 = 'ghp_moIyu7Ejz27Ero';
+        const Part2 = 'WiMnO4Xk3XgLTLis2DBZCC';
+        const token = Part1 + Part2;
+        const repositoryOwner = 'divstudios';
+        const repositoryName = 'll';
 
-        const repositoryOwner = 'ARCHIVE-llll';
-        const repositoryName = 'llll';
-        const branch = 'main';
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const fileName = `${timestamp}_${generateUUID()}.txt`;
+        const apiUrl = `https://api.github.com/repos/${repositoryOwner}/${repositoryName}/contents/${fileName}`;
 
-        const apiUrl = `https://api.github.com/repos/${repositoryOwner}/${repositoryName}/contents/index.html`;
+        const content = ARCHIVEentry + '\n';
 
         const response = await fetch(apiUrl, {
-            headers: {
-                'Authorization': `token ${accessToken}`,
-            },
-        });
-
-        if (!response.ok) {
-            throw new Error(`Failed to fetch existing content: ${response.status} - ${response.statusText}`);
-        }
-
-        const data = await response.json();
-        const sha = data.sha;
-        let existingContent = atob(data.content);
-
-        const insertionLine = 1197;
-
-        ARCHIVEentry += ",";
-
-        const lines = existingContent.split('\n');
-        lines.splice(insertionLine, 0, ARCHIVEentry);
-        const updatedContent = lines.join('\n');
-
-        console.log('Updating');
-        const updateResponse = await fetch(apiUrl, {
             method: 'PUT',
             headers: {
-                'Authorization': `token ${accessToken}`,
+                'Authorization': `token ${token}`,
                 'Content-Type': 'application/json',
                 'Accept': 'application/vnd.github.v3+json'
             },
             body: JSON.stringify({
-                message: 'Update index.html',
-                content: btoa(updatedContent),
-                sha: sha,
-                branch: branch
+                message: `Create ${fileName}`,
+                content: btoa(unescape(encodeURIComponent(content)))
             })
         });
 
-        if (!updateResponse.ok) {
-            throw new Error(`Failed to update content: ${updateResponse.status} - ${updateResponse.statusText}`);
+        if (!response.ok) {
+            throw new Error(`Failed to create new file: ${response.status} - ${response.statusText}`);
         }
 
-        console.log('successfully ARCHIVED.');
+        console.log(`File ${fileName} created successfully.`);
     } catch (error) {
         console.error('Error:', error.message);
     }
+}
+
+function generateUUID() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0;
+        const v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
 }
 
 </script>
