@@ -56,19 +56,25 @@
             border: none;
             cursor: pointer;
             outline: none;
-            opacity: 1;
-            transition: opacity 2.2s;
+            transition: opacity 3s ease-in-out;
             z-index: 13;
         }
+
+
+#startCameraButton img.fade-in {
+    opacity: 1;
+}
+
+#startCameraButton img.fade-out {
+    opacity: 0;
+}
 
 #startCameraButton img {
     width: 222px;
     height: auto;
+    transition: opacity 3s ease-in-out;
+    opacity: 0;
 }
-
-#startCameraButton:hover {
-            opacity: 1;
-        }
 
 #MenuButton {
     user-select: none;
@@ -269,8 +275,9 @@
     </div>
 
 <button id="startCameraButton">
-        <img src="presplash.webp">
+    <img src="presplash.webp" alt="Start Camera">
 </button>
+
 
     <button id="MenuButton" onclick="toggleMenu()">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
@@ -527,8 +534,24 @@ document.addEventListener('touchend', (event) => {
     handleSwipe();
 });
 
-startCameraButton.addEventListener('click', startCamera);
+document.addEventListener('DOMContentLoaded', () => {
+    const startCameraButton = document.getElementById('startCameraButton');
+    const startCameraImage = startCameraButton.querySelector('img');
 
+    setTimeout(() => {
+        startCameraImage.classList.add('fade-in');
+
+        setTimeout(() => {
+            startCameraImage.classList.remove('fade-in');
+            startCameraImage.classList.add('fade-out');
+
+            setTimeout(() => {
+                startCameraButton.style.display = 'none';
+                startCamera();
+            }, 3000);
+        }, 3000);
+    }, 50);
+});
 
 function takePhoto() {
     if (stream) {
