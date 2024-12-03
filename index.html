@@ -557,20 +557,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const startCameraButton = document.getElementById('startCameraButton');
     const startCameraImage = startCameraButton.querySelector('img');
 
-    setTimeout(() => {
-        startCameraImage.classList.add('fade-in');
+    startCameraButton.addEventListener('click', () => {
+        startCameraButton.style.display = 'none';
+        startCamera();
+    });
 
-        setTimeout(() => {
-            startCameraImage.classList.remove('fade-in');
-            startCameraImage.classList.add('fade-out');
+    setTimeout(() => {
+        if (startCameraButton.style.display !== 'none') {
+            startCameraImage.classList.add('fade-in');
 
             setTimeout(() => {
-                startCameraButton.style.display = 'none';
-                startCamera();
+                startCameraImage.classList.remove('fade-in');
+                startCameraImage.classList.add('fade-out');
+
+                setTimeout(() => {
+                    if (startCameraButton.style.display !== 'none') {
+                        startCameraButton.style.display = 'none';
+                        startCamera();
+                    }
+                }, 3000);
             }, 3000);
-        }, 3000);
+        }
     }, 50);
 });
+
 
 function takePhoto() {
     if (stream) {
